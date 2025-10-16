@@ -1,4 +1,4 @@
-# Pacote para Reprodução para: MEASURING THE PERFORMANCE OF DISTRIBUTED STREAM PROCESSING IN EDGE COMPUTING
+# Pacote para Reprodução para: MEDINDO O DESEMPENHO DE DISTRIBUTED STREAM PROCESSING EM EDGE COMPUTING
 
 Nossa dissertação de mestrado, *Medindo o Desempenho de Distributed Stream Processing em Edge Computing*, utiliza o *ShuffleBench* para medir o comportamento de frameworks de DSP como o Kafka Streams e o Spark Structured Streaming em ambientes de computação de borda com recursos escassos. Usando o ShuffleBench, o estudo visa identificar otimizações de desempenho para essas tecnologias.
 
