@@ -1,0 +1,21 @@
+pluginManagement {
+    repositories {
+        maven { url "https://plugins.gradle.org/m2/" }
+        gradlePluginPortal()
+        google()
+        mavenCentral()
+    }
+}
+
+rootProject.name = 'shufflebench'
+
+
+
+include 'commons'
+include 'latency-exporter'
+include 'load-generator'
+include 'shuffle-flink'
+include 'shuffle-hzcast'
+include 'shuffle-kstreams'
+include 'shuffle-spark'
+include 'shuffle-spark-offset-committer'

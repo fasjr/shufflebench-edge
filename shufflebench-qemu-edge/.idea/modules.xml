@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/jib-0.27.1-core/examples/multi-module/.mvn/.mvn.iml" filepath="$PROJECT_DIR$/jib-0.27.1-core/examples/multi-module/.mvn/.mvn.iml" />
+      <module fileurl="file://$PROJECT_DIR$/jib-0.27.1-core/examples/spring-boot/.mvn/.mvn1.iml" filepath="$PROJECT_DIR$/jib-0.27.1-core/examples/spring-boot/.mvn/.mvn1.iml" />
+      <module fileurl="file://$PROJECT_DIR$/jib-0.27.1-core/examples/dropwizard/.mvn/.mvn2.iml" filepath="$PROJECT_DIR$/jib-0.27.1-core/examples/dropwizard/.mvn/.mvn2.iml" />
+      <module fileurl="file://$PROJECT_DIR$/jib-0.27.1-core/jib-gradle-plugin/src/integration-test/resources/gradle/projects/multiproject/a_packaged/a_packaged.iml" filepath="$PROJECT_DIR$/jib-0.27.1-core/jib-gradle-plugin/src/integration-test/resources/gradle/projects/multiproject/a_packaged/a_packaged.iml" />
+      <module fileurl="file://$PROJECT_DIR$/jib-0.27.1-core/jib-gradle-plugin/src/integration-test/resources/gradle/projects/multiproject/b_dependency/b_dependency.iml" filepath="$PROJECT_DIR$/jib-0.27.1-core/jib-gradle-plugin/src/integration-test/resources/gradle/projects/multiproject/b_dependency/b_dependency.iml" />
+      <module fileurl="file://$PROJECT_DIR$/jib-0.27.1-core/jib-gradle-plugin/src/test/resources/gradle/projects/multi-service/complex-service/complex-service.iml" filepath="$PROJECT_DIR$/jib-0.27.1-core/jib-gradle-plugin/src/test/resources/gradle/projects/multi-service/complex-service/complex-service.iml" />
+      <module fileurl="file://$PROJECT_DIR$/jib-0.27.1-core/jib-maven-plugin/src/test/resources/maven/projects/multi/complex-service/complex-service1.iml" filepath="$PROJECT_DIR$/jib-0.27.1-core/jib-maven-plugin/src/test/resources/maven/projects/multi/complex-service/complex-service1.iml" />
+      <module fileurl="file://$PROJECT_DIR$/jib-0.27.1-core/jib-gradle-plugin/src/test/resources/gradle/projects/all-local-multi-service/complex-service/complex-service2.iml" filepath="$PROJECT_DIR$/jib-0.27.1-core/jib-gradle-plugin/src/test/resources/gradle/projects/all-local-multi-service/complex-service/complex-service2.iml" />
+      <module fileurl="file://$PROJECT_DIR$/jib-0.27.1-core/jib-gradle-plugin/src/integration-test/resources/gradle/projects/default-target/default-target.iml" filepath="$PROJECT_DIR$/jib-0.27.1-core/jib-gradle-plugin/src/integration-test/resources/gradle/projects/default-target/default-target.iml" />
+      <module fileurl="file://$PROJECT_DIR$/jib-0.27.1-core/jib-maven-plugin/src/test/resources/maven/projects/default-target/default-target1.iml" filepath="$PROJECT_DIR$/jib-0.27.1-core/jib-maven-plugin/src/test/resources/maven/projects/default-target/default-target1.iml" />
+      <module fileurl="file://$PROJECT_DIR$/jib-0.27.1-core/examples/dropwizard/src/dropwizard.iml" filepath="$PROJECT_DIR$/jib-0.27.1-core/examples/dropwizard/src/dropwizard.iml" />
+      <module fileurl="file://$PROJECT_DIR$/jib-0.27.1-core/jib-cli/src/integration-test/resources/jarTest/jarTest.iml" filepath="$PROJECT_DIR$/jib-0.27.1-core/jib-cli/src/integration-test/resources/jarTest/jarTest.iml" />
+      <module fileurl="file://$PROJECT_DIR$/jib-0.27.1-core/examples/java-agent/java-agent.iml" filepath="$PROJECT_DIR$/jib-0.27.1-core/examples/java-agent/java-agent.iml" />
+      <module fileurl="file://$PROJECT_DIR$/jib-0.27.1-core/jib-gradle-plugin-extension-api/jib-gradle-plugin-extension-api.iml" filepath="$PROJECT_DIR$/jib-0.27.1-core/jib-gradle-plugin-extension-api/jib-gradle-plugin-extension-api.iml" />
+      <module fileurl="file://$PROJECT_DIR$/jib-0.27.1-core/jib-maven-plugin-extension-api/jib-maven-plugin-extension-api.iml" filepath="$PROJECT_DIR$/jib-0.27.1-core/jib-maven-plugin-extension-api/jib-maven-plugin-extension-api.iml" />
+      <module fileurl="file://$PROJECT_DIR$/jib-0.27.1-core/jib-plugins-extension-common/jib-plugins-extension-common.iml" filepath="$PROJECT_DIR$/jib-0.27.1-core/jib-plugins-extension-common/jib-plugins-extension-common.iml" />
+      <module fileurl="file://$PROJECT_DIR$/jib-0.27.1-core/jib-gradle-plugin/src/test/resources/gradle/projects/lazy-evaluation/lazy-evaluation.iml" filepath="$PROJECT_DIR$/jib-0.27.1-core/jib-gradle-plugin/src/test/resources/gradle/projects/lazy-evaluation/lazy-evaluation.iml" />
+      <module fileurl="file://$PROJECT_DIR$/jib-0.27.1-core/jib-gradle-plugin/src/test/resources/gradle/projects/all-local-multi-service/lib/lib.iml" filepath="$PROJECT_DIR$/jib-0.27.1-core/jib-gradle-plugin/src/test/resources/gradle/projects/all-local-multi-service/lib/lib.iml" />
+      <module fileurl="file://$PROJECT_DIR$/jib-0.27.1-core/jib-gradle-plugin/src/main/main.iml" filepath="$PROJECT_DIR$/jib-0.27.1-core/jib-gradle-plugin/src/main/main.iml" />
+      <module fileurl="file://$PROJECT_DIR$/jib-0.27.1-core/jib-maven-plugin/src/test/resources/maven/projects/multi/lib/src/main/main1.iml" filepath="$PROJECT_DIR$/jib-0.27.1-core/jib-maven-plugin/src/test/resources/maven/projects/multi/lib/src/main/main1.iml" />
+      <module fileurl="file://$PROJECT_DIR$/jib-0.27.1-core/jib-core/src/main/main2.iml" filepath="$PROJECT_DIR$/jib-0.27.1-core/jib-core/src/main/main2.iml" />
+      <module fileurl="file://$PROJECT_DIR$/jib-0.27.1-core/jib-build-plan/src/main/main3.iml" filepath="$PROJECT_DIR$/jib-0.27.1-core/jib-build-plan/src/main/main3.iml" />
+      <module fileurl="file://$PROJECT_DIR$/jib-0.27.1-core/examples/micronaut/src/main/main4.iml" filepath="$PROJECT_DIR$/jib-0.27.1-core/examples/micronaut/src/main/main4.iml" />
+      <module fileurl="file://$PROJECT_DIR$/jib-0.27.1-core/jib-gradle-plugin/src/test/resources/gradle/projects/multi-service/lib/src/main/main5.iml" filepath="$PROJECT_DIR$/jib-0.27.1-core/jib-gradle-plugin/src/test/resources/gradle/projects/multi-service/lib/src/main/main5.iml" />
+      <module fileurl="file://$PROJECT_DIR$/jib-0.27.1-core/jib-maven-plugin/src/main/main6.iml" filepath="$PROJECT_DIR$/jib-0.27.1-core/jib-maven-plugin/src/main/main6.iml" />
+      <module fileurl="file://$PROJECT_DIR$/jib-0.27.1-core/jib-plugins-common/src/main/main7.iml" filepath="$PROJECT_DIR$/jib-0.27.1-core/jib-plugins-common/src/main/main7.iml" />
+      <module fileurl="file://$PROJECT_DIR$/jib-0.27.1-core/jib-cli/src/main/main8.iml" filepath="$PROJECT_DIR$/jib-0.27.1-core/jib-cli/src/main/main8.iml" />
+      <module fileurl="file://$PROJECT_DIR$/jib-0.27.1-core/examples/multi-module/name-service/name-service.iml" filepath="$PROJECT_DIR$/jib-0.27.1-core/examples/multi-module/name-service/name-service.iml" />
+      <module fileurl="file://$PROJECT_DIR$/jib-0.27.1-core/jib-gradle-plugin/src/test/resources/gradle/projects/platform/platform.iml" filepath="$PROJECT_DIR$/jib-0.27.1-core/jib-gradle-plugin/src/test/resources/gradle/projects/platform/platform.iml" />
+      <module fileurl="file://$PROJECT_DIR$/jib-0.27.1-core/jib-maven-plugin/src/test/resources/maven/projects/spring-boot-multi/service-1/service-1.iml" filepath="$PROJECT_DIR$/jib-0.27.1-core/jib-maven-plugin/src/test/resources/maven/projects/spring-boot-multi/service-1/service-1.iml" />
+      <module fileurl="file://$PROJECT_DIR$/jib-0.27.1-core/jib-maven-plugin/src/test/resources/maven/projects/spring-boot-multi/service-2/service-2.iml" filepath="$PROJECT_DIR$/jib-0.27.1-core/jib-maven-plugin/src/test/resources/maven/projects/spring-boot-multi/service-2/service-2.iml" />
+      <module fileurl="file://$PROJECT_DIR$/jib-0.27.1-core/examples/multi-module/shared-library/shared-library.iml" filepath="$PROJECT_DIR$/jib-0.27.1-core/examples/multi-module/shared-library/shared-library.iml" />
+    </modules>
+  </component>
+</project>

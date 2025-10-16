@@ -1,0 +1,8 @@
+jib {
+    from {
+        image = 'openjdk:11-jdk-slim'
+    }
+    to {
+        image = 'demo-app'
+    }
+}

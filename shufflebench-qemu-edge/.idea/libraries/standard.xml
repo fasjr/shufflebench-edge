@@ -1,0 +1,15 @@
+<component name="libraryTable">
+  <library name="standard">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/jib-0.27.1-core/jib-cli/src/test/resources/jar/standard/standardJarWithOnlyClasses.jar!/" />
+      <root url="jar://$PROJECT_DIR$/jib-0.27.1-core/jib-cli/src/test/resources/jar/standard/singleDepJar.jar!/" />
+      <root url="jar://$PROJECT_DIR$/jib-0.27.1-core/jib-cli/src/test/resources/jar/standard/emptyStandardJar.jar!/" />
+      <root url="jar://$PROJECT_DIR$/jib-0.27.1-core/jib-cli/src/test/resources/jar/standard/standardJarWithoutClassPath.jar!/" />
+      <root url="jar://$PROJECT_DIR$/jib-0.27.1-core/jib-cli/src/test/resources/jar/standard/standardJarWithClassPath.jar!/" />
+      <root url="jar://$PROJECT_DIR$/jib-0.27.1-core/jib-cli/src/test/resources/jar/standard/jarWithInvalidClass.jar!/" />
+      <root url="jar://$PROJECT_DIR$/jib-0.27.1-core/jib-cli/src/test/resources/jar/standard/dependency3-SNAPSHOT-1.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>

@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ScalaSbtSettings">
+    <option name="customVMPath" value="$USER_HOME$/.gradle/jdks/adoptium-11-x64-hotspot-linux/jdk-11.0.23+9" />
+  </component>
+</project>

@@ -1,0 +1,11 @@
+<component name="libraryTable">
+  <library name="dependencies2">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/jib-0.27.1-core/jib-core/src/test/resources/core/application/dependencies/libraryA.jar!/" />
+      <root url="jar://$PROJECT_DIR$/jib-0.27.1-core/jib-core/src/test/resources/core/application/dependencies/dependency-1.0.0.jar!/" />
+      <root url="jar://$PROJECT_DIR$/jib-0.27.1-core/jib-core/src/test/resources/core/application/dependencies/libraryB.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>

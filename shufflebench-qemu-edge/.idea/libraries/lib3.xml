@@ -1,0 +1,10 @@
+<component name="libraryTable">
+  <library name="lib3">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/jib-0.27.1-core/jib-plugins-common/src/test/resources/plugins-common/exploded-war/WEB-INF/lib/dependencyX-1.0.0-SNAPSHOT.jar!/" />
+      <root url="jar://$PROJECT_DIR$/jib-0.27.1-core/jib-plugins-common/src/test/resources/plugins-common/exploded-war/WEB-INF/lib/dependency-1.0.0.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>

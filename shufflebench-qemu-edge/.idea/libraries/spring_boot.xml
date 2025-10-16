@@ -1,0 +1,13 @@
+<component name="libraryTable">
+  <library name="spring-boot">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/jib-0.27.1-core/jib-cli/src/test/resources/jar/spring-boot/springboot_layered_allEmptyLayers.jar!/" />
+      <root url="jar://$PROJECT_DIR$/jib-0.27.1-core/jib-cli/src/test/resources/jar/spring-boot/springboot_sample.jar!/" />
+      <root url="jar://$PROJECT_DIR$/jib-0.27.1-core/jib-cli/src/test/resources/jar/spring-boot/springboot_layered.jar!/" />
+      <root url="jar://$PROJECT_DIR$/jib-0.27.1-core/jib-cli/src/test/resources/jar/spring-boot/springboot_layered_singleEmptyLayer.jar!/" />
+      <root url="jar://$PROJECT_DIR$/jib-0.27.1-core/jib-cli/src/test/resources/jar/spring-boot/springboot_notLayered.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>

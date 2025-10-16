@@ -1,0 +1,9 @@
+<component name="libraryTable">
+  <library name="java18">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/jib-0.27.1-core/jib-cli/src/test/resources/jar/java18.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>

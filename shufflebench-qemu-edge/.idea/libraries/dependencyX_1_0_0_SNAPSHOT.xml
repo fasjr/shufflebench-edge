@@ -1,0 +1,9 @@
+<component name="libraryTable">
+  <library name="dependencyX-1.0.0-SNAPSHOT">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/jib-0.27.1-core/jib-maven-plugin/src/test/resources/maven/testM2/com/test/dependencyX/1.0.0-SNAPSHOT/dependencyX-1.0.0-SNAPSHOT.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>

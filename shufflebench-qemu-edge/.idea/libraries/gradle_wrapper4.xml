@@ -1,0 +1,9 @@
+<component name="libraryTable">
+  <library name="gradle-wrapper4">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/jib-0.27.1-core/examples/helloworld/gradle/wrapper/gradle-wrapper.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>

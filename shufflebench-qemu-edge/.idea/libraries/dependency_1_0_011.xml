@@ -1,0 +1,9 @@
+<component name="libraryTable">
+  <library name="dependency-1.0.011">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/jib-0.27.1-core/jib-gradle-plugin/src/test/resources/gradle/projects/simple/libs/dependency-1.0.0.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>

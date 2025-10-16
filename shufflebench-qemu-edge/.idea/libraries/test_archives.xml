@@ -1,0 +1,12 @@
+<component name="libraryTable">
+  <library name="test-archives">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/jib-0.27.1-core/jib-plugins-common/src/test/resources/plugins-common/test-archives/zip-slip-win.zip!/" />
+      <root url="jar://$PROJECT_DIR$/jib-0.27.1-core/jib-plugins-common/src/test/resources/plugins-common/test-archives/test.zip!/" />
+      <root url="jar://$PROJECT_DIR$/jib-0.27.1-core/jib-plugins-common/src/test/resources/plugins-common/test-archives/zip-slip.zip!/" />
+      <root url="jar://$PROJECT_DIR$/jib-0.27.1-core/jib-plugins-common/src/test/resources/plugins-common/test-archives/zip-only-file-packaged.zip!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>

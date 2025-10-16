@@ -1,0 +1,13 @@
+<component name="libraryTable">
+  <library name="dependencies">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/jib-0.27.1-core/jib-gradle-plugin/src/test/resources/gradle/application/dependencies/dependencyX-1.0.0-SNAPSHOT.jar!/" />
+      <root url="jar://$PROJECT_DIR$/jib-0.27.1-core/jib-gradle-plugin/src/test/resources/gradle/application/dependencies/libraryB.jar!/" />
+      <root url="jar://$PROJECT_DIR$/jib-0.27.1-core/jib-gradle-plugin/src/test/resources/gradle/application/dependencies/dependency-1.0.0.jar!/" />
+      <root url="jar://$PROJECT_DIR$/jib-0.27.1-core/jib-gradle-plugin/src/test/resources/gradle/application/dependencies/library.jarC.jar!/" />
+      <root url="jar://$PROJECT_DIR$/jib-0.27.1-core/jib-gradle-plugin/src/test/resources/gradle/application/dependencies/libraryA.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>
