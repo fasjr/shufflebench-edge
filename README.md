@@ -21,12 +21,52 @@ Utilizar o Theodolite a partir da branch ShuffleBench-Fault-tolerance-DEBS24 do 
 ```
 ## Instalar Theodolite Benchmarks
 
-
 Os arquivos de deploy dos benchmarks e do executions dos experimentos estão localizados em "ShuffleBench"
 
-Deploy dos benchmarks: 'Kubernetes\shuffle-sparkStructuredStreaming\' e 'Kubernetes\shuffle-kstreams\'
+Baixar o deploy deste repositório "ShuffleBench\Kubernetes" e a partir da pasta, execute:
+```sh
+# Delete configmaps if already created before
+kubectl delete configmaps --ignore-not-found=true shufflebench-resources-load-generator shufflebench-resources-latency-exporter shufflebench-resources-kstreams shufflebench-resources-spark 
+kubectl create configmap shufflebench-resources-load-generator --from-file ./shuffle-load-generator/
+kubectl create configmap shufflebench-resources-latency-exporter --from-file ./shuffle-latency-exporter/
+kubectl create configmap shufflebench-resources-kstreams --from-file ./shuffle-kstreams/
+kubectl create configmap shufflebench-resources-spark --from-file ./shuffle-sparkStructuredStreaming/
 
-Deploy dos executions: 'Kubernetes\evaluation\edge\'
+kubectl apply -f theodolite-benchmark-kstreams.yaml
+kubectl apply -f theodolite-benchmark-spark.yaml
+```
+Execute esse comando, para verificar se os benchmarks estão prontos para execução:
+
+```sh kubectl get benchmarks
+```
+#Executar os Experimentos:
+
+Os arquivos YAML de deploy dos experimentos estão localizados em: 'ShuffleBench\evaluation\edge\'
+
+Execute:
+```sh
+kubectl apply -f kstreams-baseline-ft.yaml
+kubectl apply -f spark-baseline-ft.yaml
+# ...
+```
+
+#acompanhar a execucao
+   
+```sh
+   kubectl logs -l app=theodolite -c theodolite -f --tail 10 
+```
+Depois do tempo de experimento definido, então execute o comando abaixo para avaliar o status da execução do benchmark:
+
+```sh
+   kubectl get executions
+```
+### Coletando os Resultados dos Benchmarks
+
+```sh
+mkdir -p results-local
+kubectl cp $(kubectl get pod -l app=theodolite -o jsonpath="{.items[0].metadata.name}"):results results-local -c results-access
+```
+Depois copie essa pasta de resultados '/results-local' para a sua maquina local.
 
 ### Analisar os Resultados de Benchmark e Replicar a Análise
 
@@ -90,10 +130,6 @@ Para o Script resources_plot temos os seguintes parâmetros de entrada para exec
 
 11. ylim-lag: Define o limite do eixo Y para o lag.
 
-
-## Replicação da Avaliação Experimental
-
-The best way to replicate the experimental evaluation of our study is to follow the github repository and the specific branch created for our experiments:. There we provide a guide on how to install, deploy, and run experiments with ShuffleBench and failure injection using Chaos Mesh. 
 
 ## Replicação da Avaliação Experimental
 
