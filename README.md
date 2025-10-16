@@ -133,10 +133,6 @@ Para o Script resources_plot temos os seguintes parâmetros de entrada para exec
 
 ## Replicação da Avaliação Experimental
 
-The best way to replicate the experimental evaluation of our study is to follow the github repository and the specific branch created for our experiments:. There we provide a guide on how to install, deploy, and run experiments with ShuffleBench and failure injection using Chaos Mesh. 
-
-## Replicação da Avaliação Experimental
-
 A melhor forma de replicar a avaliação experimental do nosso estudo é seguir o repositório do GitHub e na branch master, criada para nossos experimentos do  [ShuffleBench Fault tolerant implementation folder](ShuffleBench) para edge computing. Lá, fornecemos um guia sobre como instalar, implantar e executar experimentos com o ShuffleBench para edge computing.
 
 
