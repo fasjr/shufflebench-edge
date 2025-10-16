@@ -8,7 +8,25 @@ Este documento descreve como replicar a avaliação experimental do nosso estudo
 
 Utilizamos a branch "ShuffleBench-Fault-tolerance-DEBS24" do shufflebench, devido a mesma conter várias definições de métricas de uso de recursos extendidas. (https://github.com/dynatrace-research/ShuffleBench/blob/ShuffleBench-Fault-tolerance-DEBS24/evaluation/fault-tolerance/kstreams-baseline-ft.yaml)
 
-Instruções de implementação desta branch está localizada em https://zenodo.org/records/11348948/README.md 
+Instruções de implementação do ambiente a partir desta branch está localizada em https://zenodo.org/records/11348948/README.md 
+
+# Executando o ShuffleBench em Kubernetes
+
+Instalar o Theodolite [Theodolite](https://www.theodolite.rocks/) um framework para execução de benckmarks de forma escalável em Kubernetes.
+
+Utilizar o Theodolite a partir da branch ShuffleBench-Fault-tolerance-DEBS24 do ShuffleBench.
+```sh helm dependencies update theodolite/helm
+   sh helm install theodolite ./theodolite/helm -f https://raw.githubusercontent.com/cau-se/theodolite/main/helm/preconfigs/extended-metrics.yaml -f values.yaml -f values-aws-nodegroups.yaml
+   
+```
+## Instalar Theodolite Benchmarks
+
+
+Os arquivos de deploy dos benchmarks e do executions dos experimentos estão localizados em "ShuffleBench"
+
+Deploy dos benchmarks: 'Kubernetes\shuffle-sparkStructuredStreaming\' e 'Kubernetes\shuffle-kstreams\'
+
+Deploy dos executions: 'Kubernetes\evaluation\edge\'
 
 ### Analisar os Resultados de Benchmark e Replicar a Análise
 
