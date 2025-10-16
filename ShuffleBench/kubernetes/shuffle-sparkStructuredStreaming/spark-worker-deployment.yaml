@@ -1,0 +1,37 @@
+kind: Deployment
+apiVersion: apps/v1
+metadata:
+  name: spark-worker
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      component: spark-worker
+  template:
+    metadata:
+      labels:
+        component: spark-worker
+    spec:
+      containers:
+        - name: spark-worker
+          image: adrianovogel/shufflebench-spark:shuffle-spark
+          #image: fernandoama/shufflebench-spark-edge:arm64
+          #image: fernandoama/shufflebench-spark-edge:amd64
+          imagePullPolicy: Always
+          command: ["/spark-worker"]
+          volumeMounts:
+            - name: shared-data
+              mountPath: /tmp/spark/ # to store the checkpoints
+          ports:
+            - containerPort: 8081
+          resources:
+            requests:
+              memory: 256Mi
+              cpu: 200m #
+            limits:
+              memory: 1Gi
+              cpu: 1000m
+
+      volumes:
+        - name: shared-data
+          emptyDir: {}

@@ -1,0 +1,33 @@
+name: Java CI with Gradle
+
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+
+permissions:
+  contents: read
+  packages: write
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v4
+    - name: Set up JDK 11
+      uses: actions/setup-java@v3
+      with:
+        java-version: '11'
+        distribution: 'temurin'
+    - name: Setup Gradle
+      uses: gradle/gradle-build-action@v2
+    - name: Execute Gradle build
+      run: ./gradlew build
+    - name: Execute Gradle jib
+      env:
+        ORG_GRADLE_PROJECT_imageUsername: ${{ github.actor }}
+        ORG_GRADLE_PROJECT_imagePassword: ${{ secrets.GITHUB_TOKEN }}
+      run: ./gradlew jib

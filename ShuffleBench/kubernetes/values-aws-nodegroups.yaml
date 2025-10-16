@@ -1,0 +1,109 @@
+kafkaClient:
+  nodeSelector:
+    type: kafka
+
+kcat:
+  nodeSelector:
+    type: kafka
+
+strimzi-kafka-operator:
+  nodeSelector:
+    type: kafka
+
+strimzi:
+  kafka:
+    storage:
+      type: ephemeral
+      size: 10Gi
+      class: kafka
+      deleteClaim: true
+    template:
+      pod:
+        affinity:
+          nodeAffinity:
+            requiredDuringSchedulingIgnoredDuringExecution:
+              nodeSelectorTerms:
+              - matchExpressions:
+                - key: type
+                  operator: In
+                  values:
+                  - kafka
+  zookeeper:
+    storage:
+      type: ephemeral
+      size: 10Gi
+      class: kafka
+      deleteClaim: true
+    template:
+      pod:
+        affinity:
+          nodeAffinity:
+            requiredDuringSchedulingIgnoredDuringExecution:
+              nodeSelectorTerms:
+              - matchExpressions:
+                - key: type
+                  operator: In
+                  values:
+                  - kafka
+  topicOperator:
+    storage:
+      type: ephemeral
+      size: 10Gi
+      class: kafka
+      deleteClaim: true
+    template:
+      pod:
+        affinity:
+          nodeAffinity:
+            requiredDuringSchedulingIgnoredDuringExecution:
+              nodeSelectorTerms:
+              - matchExpressions:
+                - key: type
+                  operator: In
+                  values:
+                  - kafka
+  kafkaExporter:
+    storage:
+      type: ephemeral
+      size: 10Gi
+      class: kafka
+      deleteClaim: true
+    template:
+      pod:
+        affinity:
+          nodeAffinity:
+            requiredDuringSchedulingIgnoredDuringExecution:
+              nodeSelectorTerms:
+              - matchExpressions:
+                - key: type
+                  operator: In
+                  values:
+                  - kafka
+
+kube-prometheus-stack:
+  prometheusOperator:
+    nodeSelector:
+      type: kafka
+  grafana:
+    nodeSelector:
+      type: kafka
+  prometheus:
+    monitor:
+      enabled: true
+      relabelings:
+        - sourceLabels: [ __meta_kubernetes_endpoint_node_name ]
+          targetLabel: node
+    prometheusSpec:
+      nodeSelector:
+        type: kafka
+
+prometheus:
+  nodeSelector:
+    type: kafka
+
+operator:
+  nodeSelector:
+    type: kafka
+  resultsVolume:
+    persistent:
+      enabled: false

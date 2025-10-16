@@ -1,0 +1,13 @@
+strimzi:
+  kafka:
+    storage:
+      type: ephemeral
+      size: 10Gi
+      storageClassName: local-path # O nome da StorageClass padrão do K3d
+      class: local-path
+      deleteClaim: true
+
+#operator:
+#  resultsVolume:
+#    persistent:
+#      enabled: false

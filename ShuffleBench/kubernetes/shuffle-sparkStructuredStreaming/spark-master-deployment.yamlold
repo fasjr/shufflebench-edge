@@ -1,0 +1,129 @@
+kind: Deployment
+apiVersion: apps/v1
+metadata:
+  name: spark-master
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      component: spark-master
+  template:
+    metadata:
+      labels:
+        component: spark-master
+    spec:
+      containers:
+        - name: spark-master
+          #image: docker.io/fernandoama/shufflebench-spark-edge:edge
+          image: adrianovogel/shufflebench-spark:shuffle-spark  
+          #image: fernandoama/shufflebench-spark-edge:amd64
+          imagePullPolicy: Always
+          command: ["/spark-master"]
+          ports:
+            - containerPort: 7077
+            - containerPort: 8080
+          resources:
+            limits:
+              memory: 1Gi
+              cpu: 300m
+        - name: spark-submit
+          #image: docker.io/fernandoama/shufflebench-spark-edge:edge
+          image: adrianovogel/shufflebench-spark:shuffle-spark
+          #image: fernandoama/shufflebench-spark-edge:amd64
+          env:
+            - name: KAFKA_BOOTSTRAP_SERVERS
+              value: "theodolite-kafka-kafka-bootstrap:9092"
+            - name: MATCHER_ZIPF_NUM_RULES
+              value: "1000000"
+            - name: MATCHER_ZIPF_TOTAL_SELECTIVITY
+              value: "0.2"
+            - name: MATCHER_ZIPF_S
+              value: "0.0"
+            - name: CONSUMER_INIT_COUNT_RANDOM
+              value: "true"
+            - name: KAFKA_TOPIC_INPUT
+              value: "input"
+            - name: KAFKA_TOPIC_OUTPUT
+              value: "output"
+            - name: SPARK_EXECUTOR_MEMORY
+              value: "1G"
+            - name: SPARK_SQL_SHUFFLE_PARTITIONS
+              value: "10"
+            - name: POD_IP
+              valueFrom:
+                fieldRef:
+                  fieldPath: status.podIP
+          command:
+            - bash
+            - -c
+            - >
+              /opt/spark/bin/spark-submit \
+                --master spark://spark-master:7077 \
+                --deploy-mode client \
+                --class com.dynatrace.research.shufflebench.SparkStructuredStreamingShuffle \
+                --conf spark.driver.host=$POD_IP \
+                --conf spark.driver.bindAddress=$POD_IP \
+                --conf spark.executor.memory=$SPARK_EXECUTOR_MEMORY \
+                --conf spark.sql.shuffle.partitions=$SPARK_SQL_SHUFFLE_PARTITIONS \
+                /shuffle-spark-1.0-SNAPSHOT-all.jar
+          ports:
+            - containerPort: 4040
+          resources:
+            limits:
+              memory: 1Gi
+              cpu: 400m #1000m #400m
+          volumeMounts:
+            - name: shared-data
+              mountPath: /tmp/spark/ # to store the checkpoints
+#          volumeMounts:
+#            - name: persistent-storage
+#              mountPath: /tmp/spark/ # to store the checkpoints. EFS was used to provide the storage infrastructure following all the steps from <https://docs.aws.amazon.com/eks/latest/userguide/efs-csi.html>
+        - name: offset-committer
+          image: ghcr.io/dynatrace-research/shufflebench/shuffle-spark-offset-committer:latest
+          env:
+            - name: KAFKA_BOOTSTRAP_SERVERS
+              value: "theodolite-kafka-kafka-bootstrap:9092"
+            - name: COMMIT_INTERVAL_MS
+              value: "300"
+          resources:
+            limits:
+              memory: 1Gi 
+              cpu: 400m #800m
+          volumeMounts:
+            - name: shared-data
+              mountPath: /tmp/spark/ # to store the checkpoints
+#          volumeMounts:
+#            - name: persistent-storage
+#              mountPath: /tmp/spark/ # to store the checkpoints
+      initContainers: #init container to delete older checkpoints
+        - name: set-folder-ownership
+          image: busybox:1.33.1  # You can use a minimal image like BusyBox for this task
+          command: ["/bin/sh", "-c"]
+          args: ["rm -rf /tmp/spark/* && mkdir -p /tmp/spark/checkpoint/offsets && chown -R spark /tmp/spark"]
+          securityContext:
+            runAsUser: 0  # Specify the user ID you want to use (0 for root)
+#      initContainers:
+#        - name: setup-spark-volumes
+#          image: busybox:1.33.1
+#          command: ["/bin/sh", "-c"]
+#          args: ["mkdir -p /tmp/spark/checkpoint/offsets && rm -rf /tmp/spark/* && chown -R spark /tmp/spark"]
+#          securityContext:
+#            runAsUser: 0  # Specify the user ID you want to use (0 for root)
+#          volumeMounts:
+#          - name: persistent-storage
+#            mountPath: /tmp/spark  # Mount path inside the init container
+           volumeMounts:
+            - name: shared-data
+              mountPath: /tmp/spark/ # to store the checkpoints
+
+
+#     nodeSelector:
+#       type: infra
+#     volumes:
+#       - name: persistent-storage
+#         emptyDir: {}
+ #     nodeSelector:
+ #       type: infra
+      volumes:
+        - name: shared-data
+          emptyDir: {}

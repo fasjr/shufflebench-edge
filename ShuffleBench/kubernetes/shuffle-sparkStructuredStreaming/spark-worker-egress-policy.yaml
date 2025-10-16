@@ -1,0 +1,21 @@
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+  name: allow-spark-worker-egress-to-master
+  namespace: default # Altere para o namespace onde seus pods Spark estão
+spec:
+  podSelector:
+    matchLabels:
+      app: spark
+      component: worker # Seleciona os pods do Spark Worker
+  policyTypes:
+    - Egress # Esta política se aplica ao tráfego de saída
+  egress:
+    - to:
+        - podSelector:
+            matchLabels:
+              app: spark
+              component: master # Permite tráfego para o pod do Spark Master
+      ports:
+        - protocol: TCP
+          port: 7077 # Permite a conexão na porta do Spark Master
