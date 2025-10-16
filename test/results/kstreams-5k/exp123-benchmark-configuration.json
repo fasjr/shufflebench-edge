@@ -1,0 +1,435 @@
+{
+  "name" : "shuffle-kstreams",
+  "waitForResourcesEnabled" : false,
+  "resourceTypes" : [ {
+    "typeName" : "Instances",
+    "patchers" : [ {
+      "type" : "ReplicaPatcher",
+      "resource" : "shuffle-kstreams-deployment.yaml",
+      "properties" : { }
+    } ]
+  } ],
+  "loadTypes" : [ {
+    "typeName" : "MessagesPerSecond",
+    "patchers" : [ {
+      "type" : "EnvVarPatcher",
+      "resource" : "shuffle-load-generator-deployment.yaml",
+      "properties" : {
+        "container" : "shuffle-load-generator",
+        "variableName" : "NUM_RECORDS_PER_SOURCE_SECOND"
+      }
+    } ]
+  } ],
+  "slos" : [ {
+    "name" : "lag trend",
+    "sloType" : "lag trend",
+    "prometheusUrl" : "http://prometheus-operated:9090",
+    "properties" : {
+      "consumerGroup" : "shufflebench-kstreams",
+      "externalSloUrl" : "http://localhost:80/evaluate-slope",
+      "promQLStepSeconds" : "1",
+      "thresholdRelToLoad" : "0.01",
+      "warmup" : "30"
+    },
+    "offset" : 0
+  }, {
+    "name" : "lag_per_input_partition",
+    "sloType" : "generic",
+    "prometheusUrl" : "http://prometheus-operated:9090",
+    "properties" : {
+      "externalSloUrl" : "http://localhost:8082",
+      "operator" : "gte",
+      "promQLQuery" : "sum by(consumergroup, topic, partition) (kafka_consumergroup_lag{topic='input'} >= 0)",
+      "promQLStepSeconds" : "1",
+      "queryAggregation" : "mean",
+      "repetitionAggregation" : "median",
+      "takeOnlyFirstMetric" : "false",
+      "threshold" : "0",
+      "warmup" : "300"
+    },
+    "offset" : 0
+  }, {
+    "name" : "input_throughput_60s",
+    "sloType" : "generic",
+    "prometheusUrl" : "http://prometheus-operated:9090",
+    "properties" : {
+      "externalSloUrl" : "http://localhost:8082",
+      "operator" : "gte",
+      "promQLQuery" : "sum by(consumergroup,topic) (rate(kafka_consumergroup_current_offset{topic='input'}[60s]) >= 0)",
+      "promQLStepSeconds" : "1",
+      "queryAggregation" : "mean",
+      "repetitionAggregation" : "median",
+      "threshold" : "0",
+      "warmup" : "300"
+    },
+    "offset" : 0
+  }, {
+    "name" : "input_throughput_120s",
+    "sloType" : "generic",
+    "prometheusUrl" : "http://prometheus-operated:9090",
+    "properties" : {
+      "externalSloUrl" : "http://localhost:8082",
+      "operator" : "gte",
+      "promQLQuery" : "sum by(consumergroup,topic) (rate(kafka_consumergroup_current_offset{topic='input'}[120s]) >= 0)",
+      "promQLStepSeconds" : "1",
+      "queryAggregation" : "mean",
+      "repetitionAggregation" : "median",
+      "threshold" : "0",
+      "warmup" : "300"
+    },
+    "offset" : 0
+  }, {
+    "name" : "outputthroughput_60s",
+    "sloType" : "generic",
+    "prometheusUrl" : "http://prometheus-operated:9090",
+    "properties" : {
+      "externalSloUrl" : "http://localhost:8082",
+      "operator" : "gte",
+      "promQLQuery" : "sum by (topic) (rate(kafka_server_brokertopicmetrics_messagesin_total{topic='output'}[60s]))",
+      "promQLStepSeconds" : "1",
+      "queryAggregation" : "mean",
+      "repetitionAggregation" : "median",
+      "threshold" : "0",
+      "warmup" : "300"
+    },
+    "offset" : 0
+  }, {
+    "name" : "outputthroughput_120s",
+    "sloType" : "generic",
+    "prometheusUrl" : "http://prometheus-operated:9090",
+    "properties" : {
+      "externalSloUrl" : "http://localhost:8082",
+      "operator" : "gte",
+      "promQLQuery" : "sum by (topic) (rate(kafka_server_brokertopicmetrics_messagesin_total{topic='output'}[120s]))",
+      "promQLStepSeconds" : "1",
+      "queryAggregation" : "mean",
+      "repetitionAggregation" : "median",
+      "threshold" : "0",
+      "warmup" : "300"
+    },
+    "offset" : 0
+  }, {
+    "name" : "latency_p50_120s",
+    "sloType" : "generic",
+    "prometheusUrl" : "http://prometheus-operated:9090",
+    "properties" : {
+      "externalSloUrl" : "http://localhost:8082",
+      "operator" : "gte",
+      "promQLQuery" : "histogram_quantile(0.5, sum(rate(shufflebench_latency_seconds_bucket[120s])) by (le))",
+      "promQLStepSeconds" : "1",
+      "queryAggregation" : "mean",
+      "repetitionAggregation" : "median",
+      "threshold" : "0",
+      "warmup" : "300"
+    },
+    "offset" : 0
+  }, {
+    "name" : "latency_p90_120s",
+    "sloType" : "generic",
+    "prometheusUrl" : "http://prometheus-operated:9090",
+    "properties" : {
+      "externalSloUrl" : "http://localhost:8082",
+      "operator" : "gte",
+      "promQLQuery" : "histogram_quantile(0.90, sum(rate(shufflebench_latency_seconds_bucket[120s])) by (le))",
+      "promQLStepSeconds" : "1",
+      "queryAggregation" : "mean",
+      "repetitionAggregation" : "median",
+      "threshold" : "0",
+      "warmup" : "300"
+    },
+    "offset" : 0
+  }, {
+    "name" : "latency_p95_120s",
+    "sloType" : "generic",
+    "prometheusUrl" : "http://prometheus-operated:9090",
+    "properties" : {
+      "externalSloUrl" : "http://localhost:8082",
+      "operator" : "gte",
+      "promQLQuery" : "histogram_quantile(0.95, sum(rate(shufflebench_latency_seconds_bucket[120s])) by (le))",
+      "promQLStepSeconds" : "1",
+      "queryAggregation" : "mean",
+      "repetitionAggregation" : "median",
+      "threshold" : "0",
+      "warmup" : "300"
+    },
+    "offset" : 0
+  }, {
+    "name" : "latency_p99_120s",
+    "sloType" : "generic",
+    "prometheusUrl" : "http://prometheus-operated:9090",
+    "properties" : {
+      "externalSloUrl" : "http://localhost:8082",
+      "operator" : "gte",
+      "promQLQuery" : "histogram_quantile(0.99, sum(rate(shufflebench_latency_seconds_bucket[120s])) by (le))",
+      "promQLStepSeconds" : "1",
+      "queryAggregation" : "mean",
+      "repetitionAggregation" : "median",
+      "threshold" : "0",
+      "warmup" : "300"
+    },
+    "offset" : 0
+  }, {
+    "name" : "numberOfWorkers",
+    "sloType" : "generic",
+    "prometheusUrl" : "http://prometheus-operated:9090",
+    "properties" : {
+      "externalSloUrl" : "http://localhost:8082",
+      "operator" : "gte",
+      "promQLQuery" : "count(kube_pod_info{pod=~\"shuffle-kstreams.*\"})",
+      "promQLStepSeconds" : "1",
+      "queryAggregation" : "mean",
+      "repetitionAggregation" : "median",
+      "takeOnlyFirstMetric" : "false",
+      "threshold" : "0",
+      "warmup" : "300"
+    },
+    "offset" : 0
+  }, {
+    "name" : "workerNodesCPUsPercentageUtilization_60s",
+    "sloType" : "generic",
+    "prometheusUrl" : "http://prometheus-operated:9090",
+    "properties" : {
+      "externalSloUrl" : "http://localhost:8082",
+      "operator" : "gte",
+      "promQLQuery" : "100 - (avg by (instance) (irate(node_cpu_seconds_total{mode=\"idle\"}[60s])) * 100) and on (instance) (label_replace(kube_node_info and on (node) kube_node_labels {label_type=\"workers\"}, \"instance\", \"$1:9100\", \"internal_ip\", \"(.*)\"))",
+      "promQLStepSeconds" : "1",
+      "queryAggregation" : "mean",
+      "repetitionAggregation" : "median",
+      "takeOnlyFirstMetric" : "false",
+      "threshold" : "0",
+      "warmup" : "300"
+    },
+    "offset" : 0
+  }, {
+    "name" : "Average_workerNodesCPUsPercentageUtilization_60s",
+    "sloType" : "generic",
+    "prometheusUrl" : "http://prometheus-operated:9090",
+    "properties" : {
+      "externalSloUrl" : "http://localhost:8082",
+      "operator" : "gte",
+      "promQLQuery" : "avg(100 - (avg by (instance) (irate(node_cpu_seconds_total{mode=\"idle\"}[60s])) * 100) and on (instance) (label_replace(kube_node_info and on (node) kube_node_labels {label_type=\"workers\"}, \"instance\", \"$1:9100\", \"internal_ip\", \"(.*)\")))",
+      "promQLStepSeconds" : "1",
+      "queryAggregation" : "mean",
+      "repetitionAggregation" : "median",
+      "takeOnlyFirstMetric" : "false",
+      "threshold" : "0",
+      "warmup" : "300"
+    },
+    "offset" : 0
+  }, {
+    "name" : "workerNodesTotalMemoryUsageWithoutConsidBufferedandCachedGB",
+    "sloType" : "generic",
+    "prometheusUrl" : "http://prometheus-operated:9090",
+    "properties" : {
+      "externalSloUrl" : "http://localhost:8082",
+      "operator" : "gte",
+      "promQLQuery" : "(node_memory_MemTotal_bytes - node_memory_MemFree_bytes - (node_memory_Buffers_bytes + node_memory_Cached_bytes))/1024/1024/1024 and on (instance) (label_replace(kube_node_info and on (node) kube_node_labels {label_type=\"workers\"}, \"instance\", \"$1:9100\", \"internal_ip\", \"(.*)\"))",
+      "promQLStepSeconds" : "1",
+      "queryAggregation" : "mean",
+      "repetitionAggregation" : "median",
+      "takeOnlyFirstMetric" : "false",
+      "threshold" : "0",
+      "warmup" : "300"
+    },
+    "offset" : 0
+  }, {
+    "name" : "workerNodesNetworkReceiveMB_60s",
+    "sloType" : "generic",
+    "prometheusUrl" : "http://prometheus-operated:9090",
+    "properties" : {
+      "externalSloUrl" : "http://localhost:8082",
+      "operator" : "gte",
+      "promQLQuery" : "sum(irate(node_network_receive_bytes_total{device=~\"eth.*\"}[60s])/1024/1024) by (instance) and on (instance) (label_replace(kube_node_info and on (node) kube_node_labels {label_type=\"workers\"}, \"instance\", \"$1:9100\", \"internal_ip\", \"(.*)\"))",
+      "promQLStepSeconds" : "1",
+      "queryAggregation" : "mean",
+      "repetitionAggregation" : "median",
+      "takeOnlyFirstMetric" : "false",
+      "threshold" : "0",
+      "warmup" : "300"
+    },
+    "offset" : 0
+  }, {
+    "name" : "workerNodesNetworkTransmitMB_60s",
+    "sloType" : "generic",
+    "prometheusUrl" : "http://prometheus-operated:9090",
+    "properties" : {
+      "externalSloUrl" : "http://localhost:8082",
+      "operator" : "gte",
+      "promQLQuery" : "sum(irate(node_network_transmit_bytes_total{device=~\"eth.*\"}[60s])/1024/1024) by (instance) and on (instance) (label_replace(kube_node_info and on (node) kube_node_labels {label_type=\"workers\"}, \"instance\", \"$1:9100\", \"internal_ip\", \"(.*)\"))",
+      "promQLStepSeconds" : "1",
+      "queryAggregation" : "mean",
+      "repetitionAggregation" : "median",
+      "takeOnlyFirstMetric" : "false",
+      "threshold" : "0",
+      "warmup" : "300"
+    },
+    "offset" : 0
+  }, {
+    "name" : "workerNodesDiskReadMB_60s",
+    "sloType" : "generic",
+    "prometheusUrl" : "http://prometheus-operated:9090",
+    "properties" : {
+      "externalSloUrl" : "http://localhost:8082",
+      "operator" : "gte",
+      "promQLQuery" : "sum(irate(node_disk_read_bytes_total[60s]) / 1024 / 1024) by (instance) and on (instance) (label_replace(kube_node_info and on (node) kube_node_labels {label_type=\"workers\"}, \"instance\", \"$1:9100\", \"internal_ip\", \"(.*)\"))",
+      "promQLStepSeconds" : "1",
+      "queryAggregation" : "mean",
+      "repetitionAggregation" : "median",
+      "takeOnlyFirstMetric" : "false",
+      "threshold" : "0",
+      "warmup" : "300"
+    },
+    "offset" : 0
+  }, {
+    "name" : "workerNodesDiskWrittenMB_60s",
+    "sloType" : "generic",
+    "prometheusUrl" : "http://prometheus-operated:9090",
+    "properties" : {
+      "externalSloUrl" : "http://localhost:8082",
+      "operator" : "gte",
+      "promQLQuery" : "sum(irate(node_disk_written_bytes_total[60s]) / 1024 / 1024) by (instance) and on (instance) (label_replace(kube_node_info and on (node) kube_node_labels {label_type=\"workers\"}, \"instance\", \"$1:9100\", \"internal_ip\", \"(.*)\"))",
+      "promQLStepSeconds" : "1",
+      "queryAggregation" : "mean",
+      "repetitionAggregation" : "median",
+      "takeOnlyFirstMetric" : "false",
+      "threshold" : "0",
+      "warmup" : "300"
+    },
+    "offset" : 0
+  }, {
+    "name" : "kafkaBrokerNodesCPUsPercentageUtilization_60s",
+    "sloType" : "generic",
+    "prometheusUrl" : "http://prometheus-operated:9090",
+    "properties" : {
+      "externalSloUrl" : "http://localhost:8082",
+      "operator" : "gte",
+      "promQLQuery" : "100 - (avg by (instance) (irate(node_cpu_seconds_total{mode=\"idle\"}[60s])) * 100) and on (instance) (label_replace(kube_node_info and on (node) kube_node_labels {label_type=\"kafka\"}, \"instance\", \"$1:9100\", \"internal_ip\", \"(.*)\"))",
+      "promQLStepSeconds" : "1",
+      "queryAggregation" : "mean",
+      "repetitionAggregation" : "median",
+      "takeOnlyFirstMetric" : "false",
+      "threshold" : "0",
+      "warmup" : "300"
+    },
+    "offset" : 0
+  }, {
+    "name" : "kafkaBrokerNodesTotalMemoryUsageWithoutConsidBufferedandCachedGB",
+    "sloType" : "generic",
+    "prometheusUrl" : "http://prometheus-operated:9090",
+    "properties" : {
+      "externalSloUrl" : "http://localhost:8082",
+      "operator" : "gte",
+      "promQLQuery" : "(node_memory_MemTotal_bytes - node_memory_MemFree_bytes - (node_memory_Buffers_bytes + node_memory_Cached_bytes))/1024/1024/1024 and on (instance) (label_replace(kube_node_info and on (node) kube_node_labels {label_type=\"kafka\"}, \"instance\", \"$1:9100\", \"internal_ip\", \"(.*)\"))",
+      "promQLStepSeconds" : "1",
+      "queryAggregation" : "mean",
+      "repetitionAggregation" : "median",
+      "takeOnlyFirstMetric" : "false",
+      "threshold" : "0",
+      "warmup" : "300"
+    },
+    "offset" : 0
+  }, {
+    "name" : "kafkaBrokerNodesNetworkReceiveMB_60s",
+    "sloType" : "generic",
+    "prometheusUrl" : "http://prometheus-operated:9090",
+    "properties" : {
+      "externalSloUrl" : "http://localhost:8082",
+      "operator" : "gte",
+      "promQLQuery" : "sum(irate(node_network_receive_bytes_total{device=~\"eth.*\"}[60s])/1024/1024) by (instance) and on (instance) (label_replace(kube_node_info and on (node) kube_node_labels {label_type=\"kafka\"}, \"instance\", \"$1:9100\", \"internal_ip\", \"(.*)\"))",
+      "promQLStepSeconds" : "1",
+      "queryAggregation" : "mean",
+      "repetitionAggregation" : "median",
+      "takeOnlyFirstMetric" : "false",
+      "threshold" : "0",
+      "warmup" : "300"
+    },
+    "offset" : 0
+  }, {
+    "name" : "kafkaBrokerNodesNetworkTransmitMB_60s",
+    "sloType" : "generic",
+    "prometheusUrl" : "http://prometheus-operated:9090",
+    "properties" : {
+      "externalSloUrl" : "http://localhost:8082",
+      "operator" : "gte",
+      "promQLQuery" : "sum(irate(node_network_transmit_bytes_total{device=~\"eth.*\"}[60s])/1024/1024) by (instance) and on (instance) (label_replace(kube_node_info and on (node) kube_node_labels {label_type=\"kafka\"}, \"instance\", \"$1:9100\", \"internal_ip\", \"(.*)\"))",
+      "promQLStepSeconds" : "1",
+      "queryAggregation" : "mean",
+      "repetitionAggregation" : "median",
+      "takeOnlyFirstMetric" : "false",
+      "threshold" : "0",
+      "warmup" : "300"
+    },
+    "offset" : 0
+  }, {
+    "name" : "kafkaBrokerNodesDiskReadMB_60s",
+    "sloType" : "generic",
+    "prometheusUrl" : "http://prometheus-operated:9090",
+    "properties" : {
+      "externalSloUrl" : "http://localhost:8082",
+      "operator" : "gte",
+      "promQLQuery" : "sum(irate(node_disk_read_bytes_total[60s]) / 1024 / 1024) by (instance) and on (instance) (label_replace(kube_node_info and on (node) kube_node_labels {label_type=\"kafka\"}, \"instance\", \"$1:9100\", \"internal_ip\", \"(.*)\"))",
+      "promQLStepSeconds" : "1",
+      "queryAggregation" : "mean",
+      "repetitionAggregation" : "median",
+      "takeOnlyFirstMetric" : "false",
+      "threshold" : "0",
+      "warmup" : "300"
+    },
+    "offset" : 0
+  }, {
+    "name" : "kafkaBrokerNodesDiskWrittenMB_60s",
+    "sloType" : "generic",
+    "prometheusUrl" : "http://prometheus-operated:9090",
+    "properties" : {
+      "externalSloUrl" : "http://localhost:8082",
+      "operator" : "gte",
+      "promQLQuery" : "sum(irate(node_disk_written_bytes_total[60s]) / 1024 / 1024) by (instance) and on (instance) (label_replace(kube_node_info and on (node) kube_node_labels {label_type=\"kafka\"}, \"instance\", \"$1:9100\", \"internal_ip\", \"(.*)\"))",
+      "promQLStepSeconds" : "1",
+      "queryAggregation" : "mean",
+      "repetitionAggregation" : "median",
+      "takeOnlyFirstMetric" : "false",
+      "threshold" : "0",
+      "warmup" : "300"
+    },
+    "offset" : 0
+  } ],
+  "kafkaConfig" : null,
+  "infrastructure" : {
+    "resources" : [ ],
+    "beforeActions" : [ ],
+    "afterActions" : [ ]
+  },
+  "sut" : {
+    "resources" : [ {
+      "configMap" : {
+        "name" : "shufflebench-resources-kstreams",
+        "files" : [ "input-topic.yaml", "output-topic.yaml", "shuffle-kstreams-deployment.yaml", "shuffle-kstreams-service.yaml", "shuffle-kstreams-jmx-configmap.yaml" ]
+      }
+    }, {
+      "configMap" : {
+        "name" : "shufflebench-resources-latency-exporter",
+        "files" : [ "shuffle-latency-exporter-deployment.yaml", "shuffle-latency-exporter-service-monitor.yaml", "shuffle-latency-exporter-service.yaml" ]
+      }
+    } ],
+    "beforeActions" : [ ],
+    "afterActions" : [ {
+      "delete" : {
+        "selector" : {
+          "apiVersion" : "kafka.strimzi.io/v1beta2",
+          "kind" : "KafkaTopic",
+          "nameRegex" : "^shufflebench-kstreams-.*"
+        }
+      }
+    } ]
+  },
+  "loadGenerator" : {
+    "resources" : [ {
+      "configMap" : {
+        "name" : "shufflebench-resources-load-generator",
+        "files" : [ "shuffle-load-generator-service.yaml", "shuffle-load-generator-deployment.yaml" ]
+      }
+    } ],
+    "beforeActions" : [ ],
+    "afterActions" : [ ]
+  }
+}
