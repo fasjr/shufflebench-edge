@@ -15,8 +15,9 @@ Instruções de implementação do ambiente a partir desta branch está localiza
 Instalar o Theodolite [Theodolite](https://www.theodolite.rocks/) um framework para execução de benckmarks de forma escalável em Kubernetes.
 
 Utilizar o Theodolite a partir da branch ShuffleBench-Fault-tolerance-DEBS24 do ShuffleBench.
-```sh helm dependencies update theodolite/helm
-   sh helm install theodolite ./theodolite/helm -f https://raw.githubusercontent.com/cau-se/theodolite/main/helm/preconfigs/extended-metrics.yaml -f values.yaml -f values-aws-nodegroups.yaml
+```sh 
+  helm dependencies update theodolite/helm
+  helm install theodolite ./theodolite/helm -f https://raw.githubusercontent.com/cau-se/theodolite/main/helm/preconfigs/extended-metrics.yaml -f values.yaml -f values-aws-nodegroups.yaml
    
 ```
 ## Instalar Theodolite Benchmarks
@@ -37,11 +38,12 @@ kubectl apply -f theodolite-benchmark-spark.yaml
 ```
 Execute esse comando, para verificar se os benchmarks estão prontos para execução:
 
-```sh kubectl get benchmarks
+```sh 
+kubectl get benchmarks
 ```
 #Executar os Experimentos:
 
-Os arquivos YAML de deploy dos experimentos estão localizados em: 'ShuffleBench\evaluation\edge\'
+Os arquivos YAML de deploy dos experimentos estão localizados em:`ShuffleBench\evaluation\edge\`
 
 Execute:
 ```sh
@@ -66,7 +68,7 @@ Depois do tempo de experimento definido, então execute o comando abaixo para av
 mkdir -p results-local
 kubectl cp $(kubectl get pod -l app=theodolite -o jsonpath="{.items[0].metadata.name}"):results results-local -c results-access
 ```
-Depois copie essa pasta de resultados '/results-local' para a sua maquina local.
+Depois copie essa pasta de resultados `/results-local` para a sua maquina local.
 
 ### Analisar os Resultados de Benchmark e Replicar a Análise
 
@@ -74,7 +76,7 @@ A seguir, descrevemos a análise dos resultados dos experimentos do nosso estudo
 
 Para analisar e visualizar os resultados de benchmark, nós fornecemos os resultados coletados dos experimentos (formato CSV) e o script Python para gerar as visualizações, que pode ser personalizado para outros experimentos. É necessária uma instalação do Python 3 com algumas bibliotecas.
 
-Dentro do diretório test/results existem subpastas para os diferentes experimentos e sua respectiva pasta `plot`, que contém a visualização gerada em formato PDF e PNG. A pasta TLI contém os experimentos relacionados à Throughput, Latência e Input Lag, enquanto a pasta Recursos contém os experimentos preliminares relacionados à consumo de recursos como Uso de CPU, Memória e Tráfego de Rede.
+Dentro do diretório `test/results` existem subpastas para os diferentes experimentos e sua respectiva pasta `plot`, que contém a visualização gerada em formato PDF e PNG. A pasta TLI contém os experimentos relacionados à Throughput, Latência e Input Lag, enquanto a pasta Recursos contém os experimentos preliminares relacionados à consumo de recursos como Uso de CPU, Memória e Tráfego de Rede.
 
 Para o Script resources_plot temos os seguintes parâmetros de entrada para execução:
 
