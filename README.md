@@ -93,44 +93,33 @@ Para o Script resources_plot temos os seguintes parâmetros de entrada para exec
 
 Para o Script resources_plot temos os seguintes parâmetros de entrada para execução:
 
-    parser = argparse.ArgumentParser(description='Gera gráficos de performance para experimentos Spark/Kafka.')
-    parser.add_argument('--exp-id', type=str, default='3', help='ID do experimento (ex: 3).')
-    parser.add_argument('--registers', type=str, default='10000', help='Registros por segundo (ex: 10000).')
-    parser.add_argument('--instances', type=str, default='3', help='Número de instâncias (ex: 3).')
-    parser.add_argument('--input-path', type=str, default='results-local', help='Diretório onde os CSVs de resultados estão.')
-    parser.add_argument('--output-path', type=str, default='../plots', help='Diretório para salvar os gráficos gerados.')
-    parser.add_argument('--output-name', type=str, default='spark-3podskill-final-bar', help='Nome base para os arquivos de saída.')
-    parser.add_argument('--duration', type=int, default=65, help='Duração em minutos a ser exibida no eixo X.')
-    
-    # --- NOVOS ARGUMENTOS PARA OS LIMITES DO EIXO Y ---
-    parser.add_argument('--ylim-input-tp', type=float, nargs=2, default=None, help='Define o limite do eixo Y para o throughput de entrada (ex: --ylim-input-tp 0 15000).')
-    parser.add_argument('--ylim-output-tp', type=float, nargs=2, default=None, help='Define o limite do eixo Y para o throughput de saída (ex: --ylim-output-tp 0 3000).')
-    parser.add_argument('--ylim-latency', type=float, nargs=2, default=None, help='Define o limite do eixo Y para a latência (ex: --ylim-latency 0 12).')
-    parser.add_argument('--ylim-lag', type=float, nargs=2, default=None, help='Define o limite do eixo Y para o lag (ex: --ylim-lag 0 60000).')
+1. kafka-exp: ID do experimento do Kafka Streams
 
-1. exp-id: ID do experimento
+2. spark-exp: ID do experimento do Spark Structured Streaming
+ 
+3. exp-id: ID do experimento
 
-2. registers: Quantidade de registros de entrada que foi usado no experimento.
+4. registers: Quantidade de registros de entrada que foi usado no experimento.
 
-4. instances: Quantidade de Instancias que foram usadas.
+5. instances: Quantidade de Instancias que foram usadas.
 
-3. spark-exp: ID do experimento do Spark Structured Streaming
+6. spark-exp: ID do experimento do Spark Structured Streaming
 
-4. input-path: Caminho com os arquivos de coleta dos experimentos.
+7. input-path: Caminho com os arquivos de coleta dos experimentos.
 
-5. output-path: Caminho com os arquivos de plot dos resultados.
+8. output-path: Caminho com os arquivos de plot dos resultados.
 
-6. output-name: Nome do arquivo com os arquivos de plot dos resultados.
+9. output-name: Nome do arquivo com os arquivos de plot dos resultados.
 
-7. duration: Tempo de execução dos experimentos.
+10. duration: Tempo de execução dos experimentos.
 
-8. ylim-input-tp: Define o limite do eixo Y para o throughput de entrada.
+11. ylim-input-tp: Define o limite do eixo Y para o throughput de entrada.
 
-9. ylim-output-tp: Define o limite do eixo Y para o throughput de saída.
+12. ylim-output-tp: Define o limite do eixo Y para o throughput de saída.
 
-10. ylim-latency: Define o limite do eixo Y para a latência.
+13. ylim-latency: Define o limite do eixo Y para a latência.
 
-11. ylim-lag: Define o limite do eixo Y para o lag.
+14. ylim-lag: Define o limite do eixo Y para o lag.
 
 
 ## Replicação da Avaliação Experimental
