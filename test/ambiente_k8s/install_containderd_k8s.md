@@ -91,8 +91,8 @@ sudo chown $(id -u):$(id -g) $HOME/.kube/config
 
 #iniciando os nodos
 sudo kubeadm join 192.168.20.214:6443 \
-    --token sl2rw5.wvvt4r6hx307eg1c \
-	--discovery-token-ca-cert-hash sha256:8e48898fd81edce23d7656010bf33d775cfb3bb7b497b30b5148d07bb17513c3
+    --token $token \
+	--discovery-token-ca-cert-hash sha256: $cert
     --cri-socket unix:///var/run/containerd/containerd.sock
     
 #sudo nano kubeadm-join-config.yaml
@@ -105,8 +105,8 @@ sudo kubeadm join 192.168.20.214:6443 \
 #  criSocket: unix:///var/run/containerd/containerd.sock
 #discovery:
 #  bootstrapToken:
-#    token: d9i14w.p30uc00xqmfjsq9h
+#    token: $token
 #    apiServerEndpoint: 192.168.20.214:6443
 #    caCertHashes: 
-#    - sha256:8e48898fd81edce23d7656010bf33d775cfb3bb7b497b30b5148d07bb17513c3
+#    - sha256:$cert
 
