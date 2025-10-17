@@ -161,19 +161,19 @@ def main():
 
     plot_definitions = {
         'spark_cpu_worker': {
-            'ax': ax[0][0], 'title': 'Spark - Worker CPUs Usage', 'ylabel': 'CPUs Usage (%)', 'ylim': (0, 100),
+            'ax': ax[0][0], 'title': 'Spark Structured Streaming - Worker CPUs Usage', 'ylabel': 'CPUs Usage (%)', 'ylim': (0, 100),
             'series': [{'label': 'Workers', 'pattern': get_pattern(args.spark_path, args.spark_exp, 'generic_workerNodesCPUsPercentageUtilization_60s_*.csv'), 'smooth': True}]
         },
         'spark_mem_worker': {
-            'ax': ax[1][0], 'title': 'Spark - Worker Memory Usage', 'ylabel': 'Memory (GB)', 'ylim': (0, 4.5),
+            'ax': ax[1][0], 'title': 'Spark Structured Streaming - Worker Memory Usage', 'ylabel': 'Memory (GB)', 'ylim': (0, 4.5),
             'series': [{'label': 'Workers', 'pattern': get_pattern(args.spark_path, args.spark_exp, 'generic_workerNodesTotalMemoryUsageWithoutConsidBufferedandCachedGB_*.csv')}]
         },
         'spark_net_worker': {
-            'ax': ax[2][0], 'title': 'Spark - Worker Network Traffic', 'ylabel': 'MB/s', 'ylim': (-5, 60),
+            'ax': ax[2][0], 'title': 'Spark Structured Streaming - Worker Network Traffic', 'ylabel': 'MB/s', 'ylim': (-5, 60),
             'series': [{'label': 'Workers', 'pattern': get_pattern(args.spark_path, args.spark_exp, 'generic_workerNodesNetworkReceiveMB_60s_*.csv'), 'smooth': True}]
         },
         'spark_cpu_additional': {
-            'ax': ax[3][0], 'title': 'Spark - Additional nodes CPUs usage', 'ylabel': 'CPUs Usage (%)', 'ylim': (0, 100),
+            'ax': ax[3][0], 'title': 'Spark Structured Streaming - Additional nodes CPUs usage', 'ylabel': 'CPUs Usage (%)', 'ylim': (0, 100),
             'series': [
                 {'pattern': get_pattern(args.spark_path, args.spark_exp, args.broker_cpu_pattern), 'pivot': True},
                 {'pattern': get_pattern(args.spark_path, args.spark_exp, args.manager_cpu_pattern), 'pivot': True}
